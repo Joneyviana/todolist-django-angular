@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load  get_links_assets %}
+{% block css %}
+
+{{ block.super }}
+<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">	
+
+{% endblock css %}
+       
+{% block content %}
+<div  ng-app="app" ng-controller="PlanListController">
+    <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#/">
+                        Minhas listas
+                    </a>
+                </li>
+                <div  ng-repeat="plan in plans">
+                
+                <li>
+                    <a ng-href="#{[plan.name]}">{[plan.name]}</a>
+                </li>
+                
+                </div>
+                <li>
+                    <form  ng-submit="adicionarPlan()">
+                       
+                        <div class="col-sm-12">
+                            <input type="text" name="plan"  ng-model="newPlan" class="form-control " placeholder="Digite o título do Quadro">
+                            <input type="submit" class="btn btn-success" value="Adicionar Quadro">
+                        
+                      </div>
+                    </form>
+                </li>
+             
+         </div>
+    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><span class="glyphicon glyphicon-list"></span></a>
+    <div ng-view></div>
+    </br>
+       <div class="pure-alert pure-alert-success" ng-show="data.success">
+               
+            <br><br>
+        </div>
+        </div>
+        </br>
+    <div class="footer">
+    </div>  
+</div>
+{% endblock content %}
+{% block javascript %}
+    
+{{ block.super }}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.min.js"></script>
+{% js_src %}
+     
+{% endblock javascript %}
