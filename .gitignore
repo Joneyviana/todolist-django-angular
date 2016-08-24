@@ -61,6 +61,8 @@ todolist/media/
 
 # Hitch directory
 tests/.hitch
+.pyc
+.pyo
 
 
 # Webpack

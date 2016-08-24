@@ -99,8 +99,11 @@ MANAGERS = ADMINS
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
-    # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
-    'default': env.db('DATABASE_URL', default='postgres:///todolist'),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
@@ -260,4 +263,3 @@ REST_FRAMEWORK = {
 
 }
 
-FACEBOOK_SECRET = os.environ.get("FACEBOOK_SECRET")
