@@ -57,7 +57,7 @@ SECURE_CONTENT_TYPE_NOSNIFF = env.bool(
 SECURE_BROWSER_XSS_FILTER = True
 SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_HTTPONLY = True
-SECURE_SSL_REDIRECT = env.bool('DJANGO_SECURE_SSL_REDIRECT', default=True)
+#SECURE_SSL_REDIRECT = env.bool('DJANGO_SECURE_SSL_REDIRECT', default=True)
 CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_HTTPONLY = True
 X_FRAME_OPTIONS = 'DENY'
@@ -98,7 +98,7 @@ SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
 
 # Anymail with Mailgun
 INSTALLED_APPS += ("anymail", )
-ANYMAIL = {
+#ANYMAIL = {
     "MAILGUN_API_KEY": env('DJANGO_MAILGUN_API_KEY'),
 }
 EMAIL_BACKEND = "anymail.backends.mailgun.MailgunBackend"
@@ -135,7 +135,7 @@ CACHES = {
 
 
 # Custom Admin URL, use {% url 'admin:index' %}
-ADMIN_URL = env('DJANGO_ADMIN_URL')
+#ADMIN_URL = env('DJANGO_ADMIN_URL')
 
 
 # WEBPACK
