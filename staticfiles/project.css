@@ -1,0 +1,64 @@
+/* These styles are generated from project.scss. */
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
+.alert-debug {
+  color: black;
+  background-color: white;
+  border-color: #d6e9c6;
+}
+
+.alert-error {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+.footer {
+    background: #2d3e50;
+    
+    text-align: center;
+    padding: 1em;
+    font-size: 80%;
+}
+
+.contrast {
+  background-color:white;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2.0), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+  width: 80%;
+}
+.line_white{
+   color: white;
+}
+.panel{
+   
+}
+.container-flex-row {
+   display: flex;
+   display: -webkit-flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   -webkit-flex-wrap: wrap;
+   
+   
+  }
+@media (max-width: 47.9em) {
+  .navbar-nav .nav-item {
+    float: none;
+    width: 100%;
+    display: inline-block;
+  }
+
+  .navbar-nav .nav-item + .nav-item {
+    margin-left: 0;
+  }
+
+  .nav.navbar-nav.pull-xs-right {
+    float: none !important;
+  }
+}
+
+/* Display django-debug-toolbar.
+   See https://github.com/django-debug-toolbar/django-debug-toolbar/issues/742
+   and https://github.com/pydanny/cookiecutter-django/issues/317
+*/
+[hidden][style="display: block;"] {
+  display: block !important;
+}
