@@ -77,12 +77,32 @@ INSTALLED_APPS += ('gunicorn', )
 # Uploaded Media Files
 # ------------------------
 # See: http://django-storages.readthedocs.io/en/latest/index.html
-S
+'''INSTALLED_APPS += (
+    'storages',
+)
+
+AWS_ACCESS_KEY_ID = env('DJANGO_AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('DJANGO_AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = env('DJANGO_AWS_STORAGE_BUCKET_NAME')
+AWS_AUTO_CREATE_BUCKET = True
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_CALLING_FORMAT = OrdinaryCallingFormat()
+
+# AWS cache settings, don't change unless you know what you're doing:
+AWS_EXPIRY = 60 * 60 * 24 * 7
+
+# TODO See: https://github.com/jschneier/django-storages/issues/47
+# Revert the following and use str after the above-mentioned bug is fixed in
+# either django-storage-redux or boto
+AWS_HEADERS = {
+    'Cache-Control': six.b('max-age=%d, s-maxage=%d, must-revalidate' % (
+        AWS_EXPIRY, AWS_EXPIRY))
+}
 
 # URL that handles the media served from MEDIA_ROOT, used for managing
 # stored files.
-
-
+MEDIA_URL = 'https://s3.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
+'''
 
 # Static Assets
 # ------------------------
@@ -98,7 +118,7 @@ SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
 
 # Anymail with Mailgun
 INSTALLED_APPS += ("anymail", )
-#ANYMAIL = {
+ANYMAIL = {
     "MAILGUN_API_KEY": env('DJANGO_MAILGUN_API_KEY'),
 }
 EMAIL_BACKEND = "anymail.backends.mailgun.MailgunBackend"
@@ -113,6 +133,14 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 ]
 
 # DATABASE CONFIGURATION
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
 # ------------------------------------------------------------------------------
 # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
 
@@ -120,6 +148,7 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 # CACHING
 # ------------------------------------------------------------------------------
 # Heroku URL does not pass the DB number, so we parse it in
+'''
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
@@ -131,9 +160,67 @@ CACHES = {
         }
     }
 }
+'''
 
-
-
+# Sentry Configuration
+'''
+SENTRY_DSN = env('DJANGO_SENTRY_DSN')
+SENTRY_CLIENT = env('DJANGO_SENTRY_CLIENT', default='raven.contrib.django.raven_compat.DjangoClient')
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'root': {
+        'level': 'WARNING',
+        'handlers': ['sentry'],
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s '
+                      '%(process)d %(thread)d %(message)s'
+        },
+    },
+    'handlers': {
+        'sentry': {
+            'level': 'ERROR',
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'ERROR',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'raven': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'sentry.errors': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'django.security.DisallowedHost': {
+            'level': 'ERROR',
+            'handlers': ['console', 'sentry'],
+            'propagate': False,
+        },
+    },
+}
+'''
+'''
+SENTRY_CELERY_LOGLEVEL = env.int('DJANGO_SENTRY_LOG_LEVEL', logging.INFO)
+RAVEN_CONFIG = {
+    'CELERY_LOGLEVEL': env.int('DJANGO_SENTRY_LOG_LEVEL', logging.INFO),
+    'DSN': SENTRY_DSN
+}
+'''
 # Custom Admin URL, use {% url 'admin:index' %}
 #ADMIN_URL = env('DJANGO_ADMIN_URL')
 
@@ -142,12 +229,7 @@ CACHES = {
 # ------------------------------------------------------------------------------
 # Webpack Production Stats file
 
+# Webpack config
 
 
 # Your production stuff: Below this line define 3rd party library settings
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
