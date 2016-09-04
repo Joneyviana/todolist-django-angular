@@ -69,6 +69,7 @@ ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['beautiylist.herokuapp
 
 INSTALLED_APPS += ('gunicorn', )
 
+SITE_ID = 1
 
 # STORAGE CONFIGURATION
 # ------------------------------------------------------------------------------
