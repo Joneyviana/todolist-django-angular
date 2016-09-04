@@ -24,12 +24,7 @@ TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 SECRET_KEY = env('DJANGO_SECRET_KEY', default='5_x&l3^+jqxcvv2!!)#9i1-^#t2=g5ks02gm8%f=68z4jn-vt-')
 
 # Mail settings
-# ------------------------------------------------------------------------------
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = "joneyviana@gmail.com"
-EMAIL_HOST_PASSWORD = "armandinho74rounda"
-EMAIL_PORT = 587
+# ----------------------------------------------------------------------------
 
 
 

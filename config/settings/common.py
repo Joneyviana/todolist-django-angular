@@ -31,17 +31,17 @@ DJANGO_APPS = (
     'django.contrib.admin',
 )
 THIRD_PARTY_APPS = (
-    
+
     'crispy_forms',  # Form layouts
     'allauth',  # registration
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
-    
+
 )
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
-    
+
     'todolist.users.apps.UsersConfig',
     'todolist.tasks.apps.TasksConfig',
     'acessToken.apps.AcesstokenConfig',
@@ -104,6 +104,11 @@ DATABASES = {
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = "joneyviana@gmail.com"
+EMAIL_HOST_PASSWORD = "armandinho74rounda"
+EMAIL_PORT = 587
 
 # GENERAL CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -158,8 +163,8 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
-            
-                
+
+
             ],
         },
     },
