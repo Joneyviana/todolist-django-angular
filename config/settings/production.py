@@ -66,7 +66,7 @@ X_FRAME_OPTIONS = 'DENY'
 # See https://docs.djangoproject.com/en/1.6/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['beautiylist.herokuapp.com'])
 # END SITE CONFIGURATION
-
+SERVER_EMAIL = 'joneyviana@gmail.com'
 INSTALLED_APPS += ('gunicorn', )
 
 SITE_ID = 1
