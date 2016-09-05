@@ -1,15 +1,20 @@
 
-var app = angular.module('app', ['ngRoute']);
+var app = angular.module('app', ['ngRoute','ngCookies']);
 
 app.config(function($interpolateProvider) {
     $interpolateProvider.startSymbol('{[');
     $interpolateProvider.endSymbol(']}');
   });
-app.config(['$httpProvider', function($httpProvider) {
+
+app.config(function ($httpProvider) {
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
-}]);
+    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+});
 
+app.run( function run( $http, $cookies ){
+    $http.defaults.headers.post['X-CSRFToken'] = $cookies['csrftoken'];
+})
 
 
 app.config(function($routeProvider, $locationProvider) {
