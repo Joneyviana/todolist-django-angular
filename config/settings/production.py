@@ -69,7 +69,9 @@ ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['beautiylist.herokuapp
 SERVER_EMAIL = 'joneyviana@gmail.com'
 INSTALLED_APPS += ('gunicorn', )
 
-SITE_ID = 1
+SITE_ID =2
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 # STORAGE CONFIGURATION
 # ------------------------------------------------------------------------------
