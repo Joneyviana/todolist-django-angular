@@ -14,7 +14,7 @@ app.config(function ($httpProvider) {
 
 app.run( function run( $http, $cookies ){
     $http.defaults.headers.post['X-CSRFToken'] = $cookies.get('csrftoken');
-    alert($cookies.getAll())
+    console.log($cookies.getAll())
 })
 
 
