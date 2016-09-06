@@ -57,9 +57,4 @@ DEBUG_TOOLBAR_CONFIG = {
 
 # django-extensions
 # ------------------------------------------------------------------------------
-INSTALLED_APPS += ('django_extensions','django_nose')
-
-# TESTING
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-
-# Your local stuff: Below this line define 3rd party library settings
+INSTALLED_APPS += ('django_extensions')
