@@ -1,17 +1,21 @@
-
+import os
 from invoke import task, call
+
+@task
+def staticfile(ctx):
+    if not os.path.exists("staticfiles"):
+        ctx.run("python manage.py collectstatic")
 
 @task
 def add(ctx):
     ctx.run("git add .")
 
-@task(add)
-def commit(ctx,msg):
-    ctx.run("git commit -m'{{msg}}'".format(msg))
-
 @task
+def commit(ctx,msg):
+    ctx.run("git commit -m'{0}'".format(msg))
+
+@task(staticfile, add)
 def deploy(ctx, msg):
-    add(ctx)
     commit(ctx, msg)
     ctx.run("git push origin master")
     ctx.run("git push heroku master")
