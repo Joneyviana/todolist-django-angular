@@ -43,7 +43,7 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
 
     'todolist.users.apps.UsersConfig',
-    'todolist.tasks.apps.DashboardConfig',
+    'todolist.dashboard.apps.DashboardConfig',
     'acessToken.apps.AcesstokenConfig',
     'utils.apps.UtilsConfig',
     # Your stuff: custom apps go here
