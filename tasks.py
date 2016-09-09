@@ -15,3 +15,19 @@ def deploy(ctx, msg):
     commit(ctx, msg)
     ctx.run("git push origin master")
     ctx.run("git push heroku master")
+
+@task
+def createsuperuser(ctx):
+    ctx.run("python manage.py createsuperuser")
+
+@task
+def migrate(ctx):
+    ctx.run("python manage.py migrate")
+
+@task
+def makemigrations(ctx):
+    ctx.run("python manage.py makemigrations")
+
+@task(makemigrations, migrate, createsuperuser)
+def start(ctx):
+    print("Done")
