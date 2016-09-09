@@ -43,7 +43,7 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
 
     'todolist.users.apps.UsersConfig',
-    'todolist.tasks.apps.TasksConfig',
+    'todolist.tasks.apps.DashboardConfig',
     'acessToken.apps.AcesstokenConfig',
     'utils.apps.UtilsConfig',
     # Your stuff: custom apps go here
@@ -98,9 +98,12 @@ MANAGERS = ADMINS
 # DATABASE CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
+
 DATABASES = {
-    # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
-    'default': env.db('DATABASE_URL', default='postgres:///todolist'),
+   'default': {
+        'ENGINE': 'django.db.backends.sqlite3',                
+        'NAME': os.path.join(str(ROOT_DIR), 'db.sqlite3'), 
+    } 
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
@@ -226,7 +229,7 @@ SOCIALACCOUNT_ADAPTER = 'todolist.users.adapters.SocialAccountAdapter'
 # Custom user app defaults
 # Select the correct user model
 AUTH_USER_MODEL = 'users.User'
-LOGIN_REDIRECT_URL = 'users:redirect'
+LOGIN_REDIRECT_URL = 'dashboard:home'
 LOGIN_URL = 'account_login'
 
 # SLUGLIFIER

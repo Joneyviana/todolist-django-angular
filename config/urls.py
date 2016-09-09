@@ -18,7 +18,7 @@ urlpatterns = [
     # User management
     url(r'^users/', include('todolist.users.urls', namespace='users')),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^dashboard/', include('todolist.tasks.urls', namespace ='dashboard')),
+    url(r'^dashboard/', include('todolist.dashboard.urls', namespace ='dashboard')),
     url(r'^access_token/', include('acessToken.urls', namespace='access_token')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # Your stuff: custom urls includes go here

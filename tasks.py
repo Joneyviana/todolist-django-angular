@@ -9,7 +9,9 @@ def add(ctx):
 def commit(ctx,msg):
     ctx.run("git commit -m'{{msg}}'".format(msg))
 
-@task(pre=[call(commit, msg="new commit")])
-def deploy(ctx):
+@task
+def deploy(ctx, msg):
+    add(ctx)
+    commit(ctx, msg)
     ctx.run("git push origin master")
     ctx.run("git push heroku master")

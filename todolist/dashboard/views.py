@@ -61,5 +61,5 @@ class PlanRetrieveView(generics.RetrieveAPIView):
         return plan 
 
 class TemplatePlanView(LoginRequiredMixin,TemplateView):
-   template_name = "tasks/plan_list.html"
+   template_name = "dashboard/plan_list.html"
     
